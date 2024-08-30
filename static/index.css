@@ -1,0 +1,50 @@
+
+/* Page */
+.vertical-center {
+        /* Fallback for browsers do NOT support vh unit */
+    min-height: 90%;
+        /* These two lines are counted as one :-)       */
+    min-height: 90vh; 
+    display: flex;
+    align-items: center;
+}
+
+/* Carousel settings */
+.carousel-item {
+    height: 50vh;
+}
+
+/* Form settings */
+label {
+    font-size: larger;
+    margin-bottom: 5px;
+}
+
+.page-number {
+    font-size: larger;
+}
+
+.page-total {
+    color: grey;
+}
+
+/* Review Page */
+.review-data {
+    font-size: large;
+}
+
+/* Recommendation page */
+#recommendation-input {
+    width: 50%;
+    /* height: 100%; */
+    margin-top: 25px;
+    padding: 10px;
+    border-radius: 25px;
+}
+
+/* Footer */
+footer {
+    padding-bottom: 0;
+    margin-bottom: 0;
+    /* position: absolute; */
+}

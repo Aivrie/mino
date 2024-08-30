@@ -1,0 +1,240 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+<!-- Questions -->
+<div class="vertical-center">
+<div class="container text-center">
+
+<div id="quizSlider" class="carousel carousel-fade" data-ride="carousel">
+
+    <div class="carousel-inner">
+
+    <div class="row">
+        <div class="col-md-12">
+            <form id="quizForm" action="{{ url_for('submit') }}" method="post">
+
+                <!-- Race/Ethnicity -->
+                <div class="carousel-item active">
+                <fieldset>
+                    <span><span class="page-number">1</span> <span class="page-total">/ 7</span></span>
+                <legend> What is your race/ethnicity?</legend><br>
+
+                    <input type="radio" name="ethnicity" value="Asian" id="">
+                    <label for="asian">Asian</label><br>
+
+                    <input type="radio" name="ethnicity" value="Black / African-American" id="">
+                    <label for="african-amer">Black / African-American</label><br>
+
+                    <input type="radio" name="ethnicity" value="Hispanic / Latino" id="">
+                    <label for="hispanic">Hispanic / Latino</label><br>
+
+                    <input type="radio" name="ethnicity" value="Middle Eastern" id="">
+                    <label for="middle-east">Middle Eastern</label><br>
+
+                    <input type="radio" name="ethnicity" value ="Native American" id="">
+                    <label for="native-american">Native American</label><br>
+
+                    <input type="radio" name="ethnicity" value="Pacific Islander" id="">
+                    <label for="pacifc">Pacific Islander</label><br>
+
+                    <input type="radio" name="ethnicity" value="White / Caucasian" id="">
+                    <label for="white-caus">White / Caucasian</label><br>
+
+                    <input type="radio" name="ethnicity" value="Mixed / Other" id="">
+                    <label for="other">Mixed / Other</label><br>
+
+                <!-- Next button -->
+                <section class="mt-5">
+                    <button id="page-button" class="btn btn-primary" type="button" data-bs-target="#quizSlider" data-bs-slide="next" >Next</button>
+                </section>
+
+                </fieldset>
+                </div>
+                <!-- /Race/Ethnicity -->
+
+
+                <!-- Skin Complexion -->
+                <div class="carousel-item">
+                <fieldset>
+                    <span> <span class="page-number">2</span> <span class="page-total">/ 7</span></span>
+
+                <legend>What is your skin complexion?</legend><br>
+
+                <input type="radio" name="comp" id="" value="Light">
+            <label for="light-comp">Light</label><br>
+
+                <input type="radio" name="comp" id="" value="Medium">
+            <label for="med-comp">Medium</label><br>
+
+                <input type="radio" name="comp" id="" value="Tan">
+            <label for="tan-comp">Tan</label><br>
+
+                <input type="radio" name="comp" id="" value="Deep">
+            <label for="deep-comp">Deep</label><br>
+
+                <!-- Next button -->
+                <section class="mt-5">
+                    <button id="page-button" class="btn btn-primary" type="button" data-bs-target="#quizSlider" data-bs-slide="next" >Next</button>
+                </section>
+
+                </fieldset>
+                </div>
+                <!-- /Skin Complexion -->
+
+
+                <!-- Skin undertone -->
+                <div class="carousel-item">
+                    <fieldset>
+                        <span> <span class="page-number">3</span> <span class="page-total">/ 7</span></span>
+
+                    <legend>What is your skin undertone?</legend><br>
+
+                    <input type="radio" name="undertone" id="" value="Cool">
+                    <label for="cool">Cool</label><br>
+
+                    <input type="radio" name="undertone" id="" value="Warm">
+                    <label for="warm">Warm</label><br>
+
+                    <input type="radio" name="undertone" id="" value="Neutral">
+                    <label for="neutral">Neutral</label><br>
+
+                    <!-- Next button -->
+                    <section class="mt-5">
+                        <button id="page-button" class="btn btn-primary" type="button" data-bs-target="#quizSlider" data-bs-slide="next" >Next</button>
+                    </section>
+
+                    </fieldset>
+                </div>
+                <!-- /Skin undertone -->
+
+
+                <!-- Skin type -->
+                <div class="carousel-item">
+                    <fieldset>
+                        <span> <span class="page-number">4</span> <span class="page-total">/ 7</span></span>
+
+                    <legend>What is your face skin type?</legend><br>
+
+                    <input type="radio" name="skin-type" id="" value="Oily">
+                    <label for="oily">Oily</label><br>
+
+                    <input type="radio" name="skin-type" id="" value="Dry">
+                    <label for="dry">Dry</label><br>
+
+                    <input type="radio" name="skin-type" id="" value="Combination">
+                    <label for="combination">Combination</label><br>
+
+                    <input type="radio" name="skin-type" id="" value="Sensitive">
+                    <label for="sensitive">Sensitive</label><br>
+
+                    <!-- Next button -->
+                    <section class="mt-5">
+                        <button id="page-button" class="btn btn-primary" type="button" data-bs-target="#quizSlider" data-bs-slide="next" >Next</button>
+                    </section>
+
+                    </fieldset>
+                </div>
+                <!-- /Skin type -->
+
+
+                <!-- Skin coverage -->
+                <div class="carousel-item">
+                    <fieldset>
+                        <span> <span class="page-number">5</span> <span class="page-total">/ 7</span></span>
+
+                    <legend>What level of product coverage do you prefer?</legend><br>
+
+                    <input type="checkbox" name="coverage" id="" value="Sheer">
+                    <label for="sheer">Sheer</label><br>
+
+                    <input type="checkbox" name="coverage" id="" value="Light">
+                    <label for="light">Light</label><br>
+
+                    <input type="checkbox" name="coverage" id="" value="Medium">
+                    <label for="medium">Medium</label><br>
+
+                    <input type="checkbox" name="coverage" id="" value="Full">
+                    <label for="full">Full</label><br>
+
+                    <!-- Next button -->
+                    <section class="mt-5">
+                        <button id="page-button" class="btn btn-primary" type="button" data-bs-target="#quizSlider" data-bs-slide="next" >Next</button>
+                    </section>
+
+                    </fieldset>
+                </div>
+                <!-- /Skin coverage -->
+
+
+                <!-- Skin allergies -->
+                <div class="carousel-item">
+                    <fieldset>
+                        <span> <span class="page-number">6</span> <span class="page-total">/ 7</span></span>
+
+                    <legend>Do you have allergies to any specific ingredients?</legend><br>
+
+                    <input type="radio" name="allergies" id="" value="Yes">
+                    <label for="yes">Yes</label><br>
+
+                    <input type="radio" name="allergies" id="" value="No">
+                    <label for="no">No</label><br><br>
+
+                    <label>If yes, list the product ingredient(s) you may be alleric to:</label><br>
+                    <textarea id="" name="ingredients" class="p-2" placeholder="Write a list of product ingredients you may be allergic to. Each ingredient should be seperated by a comma" rows="4" cols="70"></textarea>
+
+                    <!-- Next button -->
+                    <section class="mt-5">
+                        <button id="page-button" class="btn btn-primary" type="button" data-bs-target="#quizSlider" data-bs-slide="next" >Next</button>
+                    </section>
+
+                    </fieldset>
+                </div>
+                <!-- /Skin allergies -->
+
+
+                <!-- Preference -->
+                <div class="carousel-item">
+                    <fieldset>
+                        <span> <span class="page-number">7</span> <span class="page-total">/ 7</span></span>
+
+                    <legend>Do you prefer products with any of the following?</legend><br>
+
+                    <input type="checkbox" name="pref" id="" value="SPF">
+                    <label for="spf">SPF Protection</label><br>
+
+                    <input type="checkbox" name="pref" id="" value="Vegan">
+                    <label for="vegan">Vegan</label><br>
+
+                    <input type="checkbox" name="pref" id="" value="Cruelty-free">
+                    <label for="cruelty">Cruelty-free</label><br>
+
+                    <input type="checkbox" name="pref" id="" value="Organic">
+                    <label for="organic">Natural / organic ingredients</label><br>
+
+                    <input type="checkbox" name="pref" id="" value="No preferences">
+                    <label for="no-pref">I have no preferences</label><br>
+
+                    <!-- Next button -->
+                    <section class="mt-5">
+                        <button id="page-button" type="submit" class="btn btn-primary btn-submit" >Submit</button>
+                    </section>
+
+                    </fieldset>
+                </div>
+                <!-- Preference -->
+
+            </form>
+        </div>
+    </div>
+
+    <div class="row">
+        <div id="result"></div>
+    </div>
+    
+</div>
+</div>
+</div>
+</div>
+
+{% endblock %}
