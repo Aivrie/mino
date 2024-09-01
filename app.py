@@ -11,7 +11,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Access enviroment variables
-OPEN_API_KEY = os.getenv('API_KEY')
+# OPEN_API_KEY = os.getenv('API_KEY')
 brand_name = os.getenv('prompt_1')
 product_url = os.getenv('prompt_2')
 
@@ -20,7 +20,7 @@ app = Flask(__name__)
 # OpenAI Configure
 client = OpenAI(
     # This is the default and can be omitted
-    api_key=OPEN_API_KEY,
+    api_key='OPEN_API_KEY',
 
 )
 
