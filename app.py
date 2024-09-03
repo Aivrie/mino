@@ -29,26 +29,26 @@ cache = Cache(app, config={
     'CACHE_TYPE': 'simple'
 })
 
-def get_recommendations(prompt):
+# def get_recommendations(prompt):
 
-    headers = {"Authorization": f"Bearer {OPEN_API_KEY}", "Content-Type": "application/json"}
-    data = {
-        'model' : "gpt-4o",
-        'messages' : [
-            {
-                "role": "system", 
-                "content": "You are a helpful makeup assistant that has knowledge on skin type, skin tone and product shades"
-                },
-            {
-                "role": "user", 
-                "content": prompt
-                }
-        ]
-    }
+#     headers = {"Authorization": f"Bearer {OPEN_API_KEY}", "Content-Type": "application/json"}
+#     data = {
+#         'model' : "gpt-4o",
+#         'messages' : [
+#             {
+#                 "role": "system", 
+#                 "content": "You are a helpful makeup assistant that has knowledge on skin type, skin tone and product shades"
+#                 },
+#             {
+#                 "role": "user", 
+#                 "content": prompt
+#                 }
+#         ]
+#     }
 
-    response = requests.post("https://api.openai.com/v1/chat/completions", headers=headers, json=data)
-    # response = completion.choices[0].text.strip()
-    return response
+#     response = requests.post("https://api.openai.com/v1/chat/completions", headers=headers, json=data)
+#     # response = completion.choices[0].text.strip()
+#     return response
 
 def check_url(text):
     url_pattern = re.compile(r'^https?://\S+$')
@@ -115,27 +115,27 @@ def recommend():
         json_str = cachedUserData.decode('utf-8')
         dict_obj = json.loads(json_str)
 
-        ethnicity = dict_obj['ethnicity'] # Accesses the key field in the dict object data
-        complexion = dict_obj['comp']
-        undertone = dict_obj['undertone']
-        skinType = dict_obj['skin-type']
-        coverage = dict_obj['coverageList'].replace(",", ", ")
-        allergy = dict_obj['allergies']
-        ingredients = dict_obj['ingredients']
-        preference = dict_obj['prefList'].replace(",", ", ")
+        # ethnicity = dict_obj['ethnicity'] # Accesses the key field in the dict object data
+        # complexion = dict_obj['comp']
+        # undertone = dict_obj['undertone']
+        # skinType = dict_obj['skin-type']
+        # coverage = dict_obj['coverageList'].replace(",", ", ")
+        # allergy = dict_obj['allergies']
+        # ingredients = dict_obj['ingredients']
+        # preference = dict_obj['prefList'].replace(",", ", ")
 
-        if check_url(query): 
-            user_prompt = f"Please suggest the best {query} for an individual of {ethnicity} with a {complexion} complexion and {undertone} undertone. \
-                            They have a {skinType} skin type and prefer the following coverage types: {coverage}. If {allergy} is 'Yes', kindly avoid recommending any \
-                            products that contain the following allergens: {ingredients}. If there are no allergies, feel free to disregard {ingredients}. Additionally, \
-                            ensure that your recommendations align with the following preferences: {preference}." 
-        else: 
-            user_prompt = f"For an individual of {ethnicity} with a {complexion} complexion and {undertone} undertone, \
-                            what is the best shade in this product line: {query}?"
+        # if check_url(query): 
+        #     user_prompt = f"Please suggest the best {query} for an individual of {ethnicity} with a {complexion} complexion and {undertone} undertone. \
+        #                     They have a {skinType} skin type and prefer the following coverage types: {coverage}. If {allergy} is 'Yes', kindly avoid recommending any \
+        #                     products that contain the following allergens: {ingredients}. If there are no allergies, feel free to disregard {ingredients}. Additionally, \
+        #                     ensure that your recommendations align with the following preferences: {preference}." 
+        # else: 
+        #     user_prompt = f"For an individual of {ethnicity} with a {complexion} complexion and {undertone} undertone, \
+        #                     what is the best shade in this product line: {query}?"
             
-        recommendation = get_recommendations(user_prompt)
+        # recommendation = get_recommendations(user_prompt)
             
-        return render_template("recommendation.html", query=recommendation)
+        return render_template("recommendation.html", query=cachedUserData)
 
 
     

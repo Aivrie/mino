@@ -1,4 +1,6 @@
 
+
+    // FetchAPI for 'recommendation' - Recommend submission
 document.getElementById('recommendationInput').addEventListener('submit', sendRecommendationData) // Attach sendData function to submit button
 function sendRecommendationData(event) {
 
@@ -20,16 +22,16 @@ function sendRecommendationData(event) {
         })
     .catch(error => console.error(error));
 
-    // fetch(`/recommend?data=${recommendationQuery}`, {
-    //     method: 'POST',
-    //     body: recommendationQuery
-    // })
-    // .then(response => response.text())
-    // .then(html => 
-    //     {
-    //        const newPage = document.open('text/html', 'replace')
-    //        newPage.write(html)
-    //        newPage.close()
-    //     })
-    // .catch(error => console.error(error));
+    fetch(`/recommend?data=${recommendationQuery}`, {
+        method: 'POST',
+        body: recommendationQuery
+    })
+    .then(response => response.text())
+    .then(html => 
+        {
+           const newPage = document.open('text/html', 'replace')
+           newPage.write(html)
+           newPage.close()
+        })
+    .catch(error => console.error(error));
 }
