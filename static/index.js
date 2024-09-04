@@ -149,6 +149,8 @@ function disableInput(event) {
     }
     else {
         allergenText.removeAttribute('readonly')
+        allergenText.value = ""
+        allergenText.setAttribute('style', 'color: black')
     }
 }
 
