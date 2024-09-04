@@ -63,41 +63,6 @@ function sendData(event) {
 
 
     // Prevent Empty Submission for each quix question
-// const questions = document.querySelectorAll('input')
-const nextBtns = document.querySelectorAll('.page-button')
-const activeSlide = myCarouselElement.querySelector('.active')
-const inputs = activeSlide.querySelectorAll('input, select, textarea');
-
-
-nextBtns.forEach(btn => {
-
-
-    btn.removeAttribute('data-bs-slide');
-    
-
-    inputs.forEach(input => {
-        input.addEventListener('change', () => {
-            if (input.checked) {
-                btn.setAttribute('data-bs-slide', 'next');
-            }
-        }
-        );
-    });
-
-
-    btn.addEventListener('click', () => {
-        if (!Array.from(inputs).some(q => q.checked)) {
-            alert('Please select an option.');
-            return;
-        }
-        // else {
-        //     location.reload()
-
-        // }
-    });
-
-
-});
 
 
     // Product Preference Disable Functionality
