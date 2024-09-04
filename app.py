@@ -29,26 +29,6 @@ cache = Cache(app, config={
     'CACHE_TYPE': 'simple'
 })
 
-# def get_recommendations(prompt):
-
-#     headers = {"Authorization": f"Bearer {OPEN_API_KEY}", "Content-Type": "application/json"}
-#     data = {
-#         'model' : "gpt-4o",
-#         'messages' : [
-#             {
-#                 "role": "system", 
-#                 "content": "You are a helpful makeup assistant that has knowledge on skin type, skin tone and product shades"
-#                 },
-#             {
-#                 "role": "user", 
-#                 "content": prompt
-#                 }
-#         ]
-#     }
-
-#     response = requests.post("https://api.openai.com/v1/chat/completions", headers=headers, json=data)
-#     # response = completion.choices[0].text.strip()
-#     return response
 
 def check_url(text):
     url_pattern = re.compile(r'^https?://\S+$')
@@ -58,45 +38,78 @@ def check_url(text):
 # Flask Routes
 @app.route("/")
 def home():
+    return render_template("home.html")
+
+@app.route("/timeout")
+def timeout():
+    return render_template("timeout.html")
+
+
+@app.route("/questions")
+def questions():
     return render_template("questions.html")
 
 
-@app.route("/review")
+@app.route('/review', methods=['POST', 'GET'])
 def review():
-    return render_template("review.html")
+    if request.method == 'GET':
+        # query = request.args.get('data')
+        try:
+            cachedUserData = cache.get('userData')
+            json_str = cachedUserData.decode('utf-8')
+            dict_obj = json.loads(json_str)
 
+            ethnicity = dict_obj['ethnicity'] # Accesses the key field in the dict object data
+            complexion = dict_obj['comp']
+            undertone = dict_obj['undertone']
+            skinType = dict_obj['skin-type']
+            coverage = dict_obj['coverageList'].replace(",", ", ")
+            allergy = dict_obj['allergies']
+            ingredients = dict_obj['ingredients']
+            preference = dict_obj['prefList'].replace(",", ", ")
 
-@app.route('/submit', methods=['POST'])
-def submit():
-    try:
-
-        data = request.get_data() # Retrieves the raw data from the request
-        cache.set('userData', data, timeout=50) # Cache the data
-
-        data_dict = json.loads(data) # Parses the JSON string into a dictionary
-
-        ethnicity = data_dict['ethnicity'] # Accesses the key field in the JSON data
-        complexion = data_dict['comp']
-        undertone = data_dict['undertone']
-        skinType = data_dict['skin-type']
-        coverage = data_dict['coverageList'].replace(",", ", ")
-        allergy = data_dict['allergies']
-        ingredients = data_dict['ingredients']
-        preference = data_dict['prefList'].replace(",", ", ")
-
-        return render_template('review.html',
-                userEthnicity=ethnicity,
-                userComp=complexion,
-                userUndertone=undertone,
-                userSkinType=skinType,
-                userCoverage=coverage,
-                userAllergy=allergy,
-                userIngredients=ingredients,
-                userPref=preference)
+            return render_template('review.html', 
+                        userEthnicity=ethnicity,
+                        userComp=complexion,
+                        userUndertone=undertone,
+                        userSkinType=skinType,
+                        userCoverage=coverage,
+                        userAllergy=allergy,
+                        userIngredients=ingredients,
+                        userPref=preference)
+        except Exception as e:
+            result = {'status': 'error', 'message': str(e)}
+            return render_template('timeout.html')
         
-    except Exception as e:
-        result = {'status': 'error', 'message': str(e)}
-        return jsonify(result), 500
+    else:
+        try:
+
+            data = request.get_data() # Retrieves the raw data from the request
+            cache.set('userData', data, timeout=3600) # Cache the data
+            data_dict = json.loads(data) # Parses the JSON string into a dictionary
+            ethnicity = data_dict['ethnicity'] # Accesses the key field in the JSON data
+            complexion = data_dict['comp']
+            undertone = data_dict['undertone']
+            skinType = data_dict['skin-type']
+            coverage = data_dict['coverageList'].replace(",", ", ")
+            allergy = data_dict['allergies']
+            ingredients = data_dict['ingredients']
+            preference = data_dict['prefList'].replace(",", ", ")
+
+            return render_template('review.html',
+                    userEthnicity=ethnicity,
+                    userComp=complexion,
+                    userUndertone=undertone,
+                    userSkinType=skinType,
+                    userCoverage=coverage,
+                    userAllergy=allergy,
+                    userIngredients=ingredients,
+                    userPref=preference)
+        
+        except Exception as e:
+            result = {'status': 'error', 'message': str(e)}
+            return jsonify(result), 500
+
     
 
 
@@ -107,13 +120,13 @@ def recommend():
         query = request.args.get('data', 'defaultQuery')
         check_url(query)
 
-        cachedUserData = cache.get('userData')
+        # cachedUserData = cache.get('userData')
 
         ''' Converting the bytes-object of form What format is this object; b'{"ethnicity":"Black / African-American","comp":"Medium","undertone":"Warm","skin-type":"Dry","coverage":"Light",
         "allergies":"No","ingredients":"","pref":"Cruelty-free","prefList":"SPF,Vegan,Cruelty-free","coverageList":"Light"}'  into a dict by decoding and then using json.loads()'''
     
-        json_str = cachedUserData.decode('utf-8')
-        dict_obj = json.loads(json_str)
+        # json_str = cachedUserData.decode('utf-8')
+        # dict_obj = json.loads(json_str)
 
         # ethnicity = dict_obj['ethnicity'] # Accesses the key field in the dict object data
         # complexion = dict_obj['comp']
@@ -135,7 +148,7 @@ def recommend():
             
         # recommendation = get_recommendations(user_prompt)
             
-        return render_template("recommendation.html", query=cachedUserData)
+        return render_template("recommendation.html")
 
 
     

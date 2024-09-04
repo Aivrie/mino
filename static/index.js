@@ -1,11 +1,3 @@
-// Carousel controls
-const myCarouselElement = document.querySelector('#quizSlider')
-const carousel = new bootstrap.Carousel(myCarouselElement, {
-  touch: false,
-  wrap: false
-})
-
-
 
 document.getElementById('quizForm').addEventListener('submit', sendData) // Attach sendData function to submit button
 
@@ -16,12 +8,9 @@ let checkBoxDataCoverage
 function sendData(event) {
     event.preventDefault();
 
-
         // Grab form div and generate a formData object to collect all input elements
     let quiz = document.getElementById('quizForm');
     let quizData = new FormData(quiz)
-
-    
 
         // Group all checkBox values from the quizData FormData object and re-append them to the quizData FormData object
     checkBoxDataPref = quizData.getAll('pref')
@@ -29,12 +18,9 @@ function sendData(event) {
     checkBoxDataCoverage = quizData.getAll('coverage')
     quizData.append('coverageList', checkBoxDataCoverage) // Coverage
 
-
-
         // Send user data to localStorage
     const localData = localStorage.setItem('User Response', quizData)
     const quizDataJSON = {}
-
 
         // Send localStorage data and quizData to postData object
     for (const [key, value] of quizData.entries()) {
@@ -42,9 +28,8 @@ function sendData(event) {
     }
     const postData = { ...localData, ...quizDataJSON}
 
-
-        // FetchAPI for 'submit' - Quiz submission
-    fetch('/submit', {
+        // FetchAPI for 'submit to review page' - Quiz submission
+    fetch('/review', {
         method: 'POST',
         body: JSON.stringify(postData),
         headers: {'Content-type': 'application/json'}
@@ -59,10 +44,28 @@ function sendData(event) {
     )
     .catch(error => console.log(error));
 
+    window.location.href = '/'
 }
 
 
-    // Prevent Empty Submission for each quix question
+// function loadData(){
+//     // FetchAPI to 'load Data' - User Response Load
+//     fetch('/review', {
+//         method: 'GET',
+//     })
+//     .then(response => response.text())
+//     .then(html => 
+//     {
+//        const newPage = document.open('text/html', 'replace')
+//        newPage.write(html)
+//        newPage.close()
+//     }
+//     )
+//     .catch(error => console.log(error));
+// }
+
+
+    // TODO -> Prevent Empty Submission for each quix question
 
 
     // Product Preference Disable Functionality

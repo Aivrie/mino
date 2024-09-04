@@ -12,7 +12,7 @@
 
     <div class="row">
         <div class="col-md-12">
-            <form id="quizForm" action="{{ url_for('submit') }}" method="post">
+            <form id="quizForm" action="{{ url_for('questions') }}" method="post">
 
                 <!-- Race/Ethnicity -->
                 <div class="carousel-item active">
@@ -67,8 +67,8 @@
                 <input type="radio" name="comp" id="med-comp" value="Medium">
             <label for="med-comp">Medium</label><br>
 
-                <input type="radio" name="comp" id="tan-comp" value="Tan">
-            <label for="tan-comp">Tan</label><br>
+                <!-- <input type="radio" name="comp" id="tan-comp" value="Tan">
+            <label for="tan-comp">Tan</label><br> -->
 
                 <input type="radio" name="comp" id="deep-comp" value="Deep">
             <label for="deep-comp">Deep</label><br>
@@ -238,5 +238,13 @@
 </div>
 </div>
 </div>
+<script>
+    // Carousel controls
+const myCarouselElement = document.querySelector('#quizSlider')
+const carousel = new bootstrap.Carousel(myCarouselElement, {
+  touch: false,
+  wrap: false
+})
+</script>
 
 {% endblock %}
